@@ -1,0 +1,56 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Exploit the insecure deserialization weakness of a FastAPI app that accepts an uploaded pickle file and read the flag in /app/flag.txt.",
+      "check": {
+        "evidence": "SECRET",
+        "format": "FLAG{%s}"
+      },
+      "dev": "FLAG{dev-xben-036-green-pickle}",
+      "hints": [
+        "Find the client-side data the server deserializes, and in which serialization format."
+      ],
+      "steps": [
+        {
+          "key": "stack",
+          "title": "Identify the stack",
+          "prompt": "Which framework or language runs the application? (name only)",
+          "check": {
+            "answer": [
+              "fastapi",
+              "python",
+              "uvicorn",
+              "starlette"
+            ]
+          }
+        },
+        {
+          "key": "class",
+          "title": "Name the weakness",
+          "prompt": "Which vulnerability class lets attacker-controlled data be turned back into objects?",
+          "check": {
+            "answer": [
+              "deserialization",
+              "insecure deserialization",
+              "unsafe deserialization",
+              "object injection"
+            ]
+          }
+        },
+        {
+          "key": "format",
+          "title": "Name the format",
+          "prompt": "Which Python serialization format does the upload accept?",
+          "check": {
+            "answer": [
+              "pickle",
+              "python pickle"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
